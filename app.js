@@ -32,6 +32,10 @@ const connect = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
+     const result = await mongoose.connection.db
+       .collection('bookings')
+       .dropIndex('sessionId_1')
+     console.log('Dropped Index:', result)
     console.log('MongoDb database Connected')
   } catch (err) {
     console.log('MongoDb Database Connection Failed')
