@@ -19,8 +19,12 @@ const corsOptions = {
   origin: ['http://localhost:3000', 'https://transcendent-sundae-2bb9db.netlify.app','https://travel-booking-application-ten.vercel.app'], // Allow local dev and deployed frontend
   credentials: true, // Allow cookies and credentials
 };
-// Allow frontend at localhost:3000
 app.use(cors(corsOptions))
+// Allow frontend at localhost:3000
+// middleware
+// middleware
+app.use(express.json())
+app.use(cookieParser())
 mongoose.set('strictQuery', false)
 const connect = async () => {
   try {
@@ -33,12 +37,7 @@ const connect = async () => {
     console.log('MongoDb Database Connection Failed')
   }
 }
-// middleware
-
-// middleware
-app.use(express.json())
 // app.use(cors(corsOption))
-app.use(cookieParser())
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/tours', tourRoute)
 app.use('/api/v1/users', UserRoute)
