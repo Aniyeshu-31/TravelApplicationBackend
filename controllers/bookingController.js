@@ -65,29 +65,47 @@ export const createBookingOrder = async (req, res) => {
 
 export const confirmBooking = async (req, res) => {
   try {
-    const { orderId, paymentId, signature, bookingDetails} = req.body
+    const { orderId, paymentId, signature, bookingDetails } = req.body
 
     if (!paymentId || !signature) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Missing payment details' })
+      console.warn('⚠️ Missing paymentId or signature')
+      return res.status(400).json({
+        success: false,
+        message: 'Missing payment details',
+      })
     }
-    console.log(bookingDetails.AmountToPay);
+
+    console.log('💰 AmountToPay:', bookingDetails.AmountToPay)
+
     // 🔐 Verify Signature
     const hmac = crypto.createHmac('sha256', process.env.RZP_KEY_SECRET)
     hmac.update(`${orderId}|${paymentId}`)
     const generatedSignature = hmac.digest('hex')
 
     if (generatedSignature !== signature) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Invalid signature' })
+      console.warn('⚠️ Invalid Razorpay Signature')
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid signature',
+      })
     }
-  console.log('📦 bookingDetails:', bookingDetails)
+
+    console.log('📦 Booking Details:', bookingDetails)
+
+    // ✅ OPTIONAL: Check if the same orderId already exists to prevent duplicates
+    const existingBooking = await Booking.findOne({ orderId })
+    if (existingBooking) {
+      console.warn('⚠️ Booking already exists for this orderId:', orderId)
+      return res.status(409).json({
+        success: false,
+        message: 'Booking already confirmed for this order.',
+      })
+    }
+
     const booking = new Booking({
       userId: bookingDetails.userId,
       userEmail: bookingDetails.userEmail,
-      tourName: bookingDetails.tourName, 
+      tourName: bookingDetails.tourName,
       fullName: bookingDetails.fullName,
       phone: bookingDetails.phone,
       guestSize: bookingDetails.guestSize,
@@ -98,18 +116,25 @@ export const confirmBooking = async (req, res) => {
       status: 'confirmed',
     })
 
-    await booking.save()
+    const savedBooking = await booking.save()
 
-    res
-      .status(200)
-      .json({ success: true, message: 'Booking confirmed', data: booking })
+    console.log('✅ Booking confirmed and saved:', savedBooking._id)
+
+    res.status(200).json({
+      success: true,
+      message: 'Booking confirmed',
+      data: savedBooking,
+    })
   } catch (err) {
-    console.error('❌ Booking Confirmation Error:', err.message)
-    res
-      .status(500)
-      .json({ success: false, message: 'Booking confirmation failed' })
+    console.error('❌ Booking Confirmation Error:', err)
+    res.status(500).json({
+      success: false,
+      message: 'Booking confirmation failed',
+      error: err.message,
+    })
   }
 }
+
 export const getBookingDetails = async (req, res) => {
   const id = req.params.id
   try {
