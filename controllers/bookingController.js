@@ -76,8 +76,6 @@ export const confirmBooking = async (req, res) => {
     }
 
     console.log('💰 AmountToPay:', bookingDetails.AmountToPay)
-
-    // 🔐 Verify Signature
     const hmac = crypto.createHmac('sha256', process.env.RZP_KEY_SECRET)
     hmac.update(`${orderId}|${paymentId}`)
     const generatedSignature = hmac.digest('hex')
@@ -91,8 +89,6 @@ export const confirmBooking = async (req, res) => {
     }
 
     console.log('📦 Booking Details:', bookingDetails)
-
-    // ✅ OPTIONAL: Check if the same orderId already exists to prevent duplicates
     const existingBooking = await Booking.findOne({ orderId })
     if (existingBooking) {
       console.warn('⚠️ Booking already exists for this orderId:', orderId)
