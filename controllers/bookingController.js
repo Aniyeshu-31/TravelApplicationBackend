@@ -5,6 +5,7 @@ import Razorpay from 'razorpay'
 import { nanoid } from 'nanoid'
 dotenv.config()
 export const createBookingOrder = async (req, res) => {
+  console.log(req.cookies.accessToken);
   try {
     const { totalAmount } = req.body
     console.log(totalAmount)
