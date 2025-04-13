@@ -56,7 +56,7 @@ const bookingSchema = new mongoose.Schema(
       default: 'pending',
     },
   },
-  { timestamps: true }
+  { timestamps: true , strict:true},
 )
 
 export default mongoose.model('Booking', bookingSchema)
