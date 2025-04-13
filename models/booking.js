@@ -27,9 +27,13 @@ const bookingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    bookAt: {
+    startAt: {
       type: Date,
       default: Date.now,
+    },
+    endAt:{
+      type:Date,
+      default:Date.now
     },
     totalAmount: {
       type: Number,
