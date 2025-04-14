@@ -38,13 +38,13 @@ export const LoginUser = async (req, res, next) => {
     }
 
     const { password, role, ...rest } = user._doc
-
+    
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET_KEY,
       { expiresIn: '15d' }
     )
-
+    console.log(token);
     // set token in browser cookies and send it to the client in the response
 
     res.cookie('accessToken', token, {
