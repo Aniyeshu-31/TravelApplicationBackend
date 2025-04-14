@@ -15,15 +15,6 @@ const corsOptions = {
   origin: 'https://travel-booking-application-ten.vercel.app',
   credentials: true, // Allow cookies and credentials
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
-  allowedHeaders: [
-    'Access-Control-Allow-Origin',
-    'Content-Type',
-    'Authorization',
-    'Origin',
-    'X-Requested-With',
-    'Accept',
-  ],
-  exposedHeaders: ['Access-Control-Allow-Credentials'],
 }
 app.use(cors(corsOptions))
 // Allow frontend at localhost:3000
