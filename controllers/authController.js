@@ -37,13 +37,13 @@ export const LoginUser = async(req,res,next)=>{
 
        // set token in browser cookies and send it to the client in the response
 
-       res
-         .cookie('accessToken', token, {
-           httpOnly: true,
-           secure: true,
-           sameSite: 'none',
-           maxAge: 15 * 24 * 60 * 60 * 1000,
-         })
+       res.cookie('accessToken', token, {
+         httpOnly: true,
+         secure: true,
+         sameSite: 'none',
+         maxAge: 15 * 24 * 60 * 60 * 1000,
+         domain: 'travelapplicationbackend.onrender.com',
+       })
          return res.status(200)
          .json({
            success: true,
