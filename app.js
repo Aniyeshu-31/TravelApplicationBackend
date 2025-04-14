@@ -29,15 +29,6 @@ const corsOptions = {
   ],
   exposedHeaders: ['Access-Control-Allow-Credentials'],
 }
-
-app.post('/testcookie',(req,res)=>{
-  res.cookie('test-cookie','helloworld',{
-    httpOnly:true,
-    secure:true,
-    sameSite:'none',
-  });
-  res.send('Cookie set');
-})
 app.use(cors(corsOptions))
 // Allow frontend at localhost:3000
 // middleware
