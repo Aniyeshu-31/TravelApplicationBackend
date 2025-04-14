@@ -48,7 +48,7 @@ export const LoginUser = async (req, res, next) => {
     // set token in browser cookies and send it to the client in the response
 
     res.cookie('accessToken', token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: 'none',
       maxAge: 15 * 24 * 60 * 60 * 1000,
