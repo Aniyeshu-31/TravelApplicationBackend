@@ -11,10 +11,6 @@ import BookingRoute from './routes/booking.js'
 dotenv.config()
 const app = express()
 // database connection
-const corsOption = {
-  origin: true,
-  credentials: true,
-}
 const corsOptions = {
   origin: [
     'http://localhost:3000',
