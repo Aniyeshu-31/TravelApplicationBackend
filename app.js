@@ -27,6 +27,7 @@ const corsOptions = {
     'X-Requested-With',
     'Accept',
   ],
+  exposedHeaders: ['Access-Control-Allow-Credentials'],
 }
 
 app.get('/testcookie',(req,res)=>{
