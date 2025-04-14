@@ -43,6 +43,7 @@ export const LoginUser = async(req,res,next)=>{
            secure: true,
            sameSite: 'none',
            maxAge: 15 * 24 * 60 * 60 * 1000,
+           domain: 'https://travelapplicationbackend.onrender.com',
          })
          .status(200)
          .json({
