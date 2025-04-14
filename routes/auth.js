@@ -1,5 +1,6 @@
 import express from 'express'
 import { LoginUser, registerUser } from '../controllers/authController.js';
+import { verifyToken,verifyAdmin,verifyUser } from '../Utils/verifyToken.js';
 const router = express.Router();
 router.post('/register',registerUser);
 router.post('/login',LoginUser);
