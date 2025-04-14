@@ -44,7 +44,7 @@ export const LoginUser = async (req, res, next) => {
       process.env.JWT_SECRET_KEY,
       { expiresIn: '15d' }
     )
-    console.log(token);
+    // console.log(token);
     // set token in browser cookies and send it to the client in the response
 
     res.cookie('accessToken', token, {
