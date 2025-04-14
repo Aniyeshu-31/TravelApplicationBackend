@@ -3,8 +3,8 @@ import { confirmBooking, createBookingOrder, getAllBookingDetails, getBookingDet
 import { verifyUser,verifyAdmin } from '../Utils/verifyToken.js';
 const router= express.Router();
 
-router.post('/', verifyUser,createBookingOrder)
+router.post('/', verifyToken,createBookingOrder)
 router.get('/:id',verifyUser,getBookingDetails)
 router.get('/',verifyAdmin,getAllBookingDetails)
-router.post('/verify',verifyUser,confirmBooking)
+router.post('/verify',verifyToken,confirmBooking)
 export default router;
