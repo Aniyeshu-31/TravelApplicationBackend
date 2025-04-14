@@ -1,6 +1,6 @@
 import express from 'express';
 import { confirmBooking, createBookingOrder, getAllBookingDetails, getBookingDetails } from '../controllers/bookingController.js';
-import { verifyUser,verifyAdmin } from '../Utils/verifyToken.js';
+import {verifyToken, verifyUser,verifyAdmin } from '../Utils/verifyToken.js';
 const router= express.Router();
 
 router.post('/', verifyToken,createBookingOrder)
