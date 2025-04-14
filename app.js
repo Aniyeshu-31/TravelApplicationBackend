@@ -12,11 +12,7 @@ dotenv.config()
 const app = express()
 // database connection
 const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'https://transcendent-sundae-2bb9db.netlify.app',
-    'https://travel-booking-application-ten.vercel.app',
-  ], // Allow local dev and deployed frontend
+  origin: 'https://travel-booking-application-ten.vercel.app/',
   credentials: true, // Allow cookies and credentials
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
