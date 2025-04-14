@@ -12,7 +12,7 @@ dotenv.config()
 const app = express()
 // database connection
 const corsOptions = {
-  origin: 'https://travel-booking-application-ten.vercel.app/',
+  origin: 'https://travel-booking-application-ten.vercel.app',
   credentials: true, // Allow cookies and credentials
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
