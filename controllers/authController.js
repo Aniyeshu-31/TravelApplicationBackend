@@ -42,7 +42,7 @@ export const LoginUser = async(req,res,next)=>{
          secure: true,
          sameSite: 'none',
          maxAge: 15 * 24 * 60 * 60 * 1000,
-         domain: 'travelapplicationbackend.onrender.com',
+         domain: 'travel-booking-application-ten.vercel.app',
        })
          return res.status(200)
          .json({
