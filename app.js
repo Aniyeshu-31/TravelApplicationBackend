@@ -30,7 +30,7 @@ const corsOptions = {
   exposedHeaders: ['Access-Control-Allow-Credentials'],
 }
 
-app.get('/testcookie',(req,res)=>{
+app.post('/testcookie',(req,res)=>{
   res.cookie('test-cookie','helloworld',{
     httpOnly:true,
     secure:true,
